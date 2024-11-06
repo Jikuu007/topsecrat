@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unknow</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            transition: background-color 0.3s;
+        }
+        h1 {
+            font-size: 3rem;
+            color: red;
+            text-align: center;
+            animation: flicker 2s infinite;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2rem;
+            text-align: center;
+            opacity: 0.7;
+            animation: disappear 5s infinite;
+        }
+        .ghost-image {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 1000%;
+            opacity: 0.8;
+            z-index: 10;
+            animation: appearDisappear 1.5s ease-in-out forwards;
+        }
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.3; }
+        }
+        @keyframes disappear {
+            0%, 90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        @keyframes appearDisappear {
+            0% { opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; }
+        }
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            animation: flickerButton 2s infinite;
+        }
+        @keyframes flickerButton {
+            0%, 19%, 22%, 25%, 54%, 57%, 100% { opacity: 1; }
+            20%, 24%, 55% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+
+<h1>กล้าป่าวว</h1>
+<p>ลองกดดูดิ</p>
+<button onclick="showGhost()">กล้ากดหรือเปล่า?</button>
+
+<img src="ghost.jpg" alt="Ghost" class="ghost-image" id="ghost">
+
+<audio id="scream-sound" src="squeaky-jumpscare-2-102254.mp3" preload="auto"></audio>
+
+<script>
+    function showGhost() {
+        const ghost = document.getElementById("ghost");
+        const scream = document.getElementById("scream-sound");
+
+        // เล่นเสียงกรีดร้องและแสดงภาพผี
+        scream.play();
+        ghost.style.display = "block";
+
+        // ซ่อนภาพผีหลังจากแสดงแล้ว
+        setTimeout(() => {
+            ghost.style.display = "none";
+        }, 1500);
+
+        // เปลี่ยนพื้นหลังเป็นสีแดงครู่หนึ่งเพื่อเพิ่มความน่ากลัว
+        document.body.style.backgroundColor = "darkred";
+        setTimeout(() => {
+            document.body.style.backgroundColor = "black";
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
